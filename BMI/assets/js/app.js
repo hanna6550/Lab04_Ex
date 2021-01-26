@@ -3,22 +3,22 @@ var Weight = prompt("Enter your Weight: ");
 
 let calcBmi = function(Height, Weight) {
      
-    return (Weight / Math.pow(Height, 2)); 
+    return (Weight / Math.pow(Height, 2)).toFixed(2); 
 }
 
 
-var bmi =  console.log("Your BMI is : " + calcBmi(Height, Weight ));
+var bmi = ( calcBmi(Height, Weight));
 
-// function undentify(){
-//     if (bmi < 18.5){
-//         return "you are under weight."
-//     }else if(bmi >= 18.5 & bmi <= 24.5 ){
-//         return "you are normal weight."
-//     }else if(bmi >= 25.0 & bmi <=29.9){
-//         return "you are over weighy."
-//     }else{
-//         return "you are obese"
-//     }
-// }
-// undentify();
+function undentify(){
+    if (bmi < 18.5){
+        console.log("Your BMI is : "+ bmi + " you are under weight.");
+    }else if(bmi >= 18.5 & bmi <= 24.5 ){
+        console.log("Your BMI is : "+ bmi +" you are normal weight.");
+    }else if(bmi >= 25.0 & bmi <=29.9){
+        console.log("Your BMI is : "+ bmi +" you are over weight.");
+    }else if(bmi> 29.9){
+        console.log("Your BMI is : "+ bmi +" you are obese");
+    }
+}
+undentify();
 
