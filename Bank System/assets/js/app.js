@@ -1,41 +1,56 @@
-var option = prompt("Enter the service :  Deposite, WithDraw, Balance or Transfer:");
+var accounts = [100, 346, 789, 435]
 
-var Amount = parseInt(prompt("Enter your Balance : "));
-var withdrawAmount;
-var value;
-
-
-// if (option == Deposite)
-// {
-//     Deposite(value);
-
-// }else {
-//     Withdraw(withdrawAmount);
-// }
-
-function Deposite(value){
-
-     return "you have " +parseInt(Amount + value) + "birr in your acconunt.";
+function deposit(amount, accNum){
+    accounts[accNum] += amount
+    console.log("Deposited to : " + accNum + " Deposited Amount: " + amount + " total balance : " + accounts[accNum])
+    return true
 }
-function Withdraw(withdrawAmount){
 
-    if (withdrawAmount > Amount){
-        return "you dont have enough balance: ";
-    }else {
-        return console.log( "you withdraw " + parseInt(withdrawAmount) + " birr. " +"you left " + (Amount - withdrawAmount) + " birr" );
+function withdraw(amount, accNum){
+    if (amount < accounts[accNum]){
+        if(amount <= 100){
+            accounts[accNum] -= amount
+            console.log("Withdrawn from : "+ accNum + " Withdrawn Amount: " + amount + " total balance : " + accounts[accNum])
+            return true
+        }else{
+            alert("you cannot withdraw more than $100")
+        }
+    } else{
+        alert("No enough Money to withdraw")
     }
-
-}
-function Balance(){
-    return "YOur balance is: " + Amount + " birr.";
-
-}
-function Transfer(){
-
+    return false
 }
 
-    
-console.log(Deposite(100));
-console.log(Withdraw(100));
-console.log(Balance());
+function balance(accNum){
+    alert("Your Balance is " + accounts[accNum])
+}
 
+function transfer(from, to, amount){
+    if (withdraw(amount, from)){
+        deposit(amount, to)
+    }
+}
+
+(
+    function(){
+        service = parseInt(prompt("What do you want to do today: \n 1: Deposit \n 2: Withdraw \n 3: Inquire Balance \n 4: transfer"))
+        console.log(accounts)
+        switch (service) {
+            case 1:
+                deposit(parseInt(prompt("Enter amount: ")), parseInt(prompt("Enter account Number(between 0 and "+(accounts.length-1)+"): ")));
+                break;
+            case 2:
+                withdraw(parseInt(prompt("Enter amount: ")), parseInt(prompt("Enter account Number(between 0 and "+(accounts.length-1)+"): ")));
+                break;
+            case 3:
+                balance(parseInt(prompt("Enter account Number(between 0 and "+(accounts.length-1)+"): ")));
+                break;
+            case 4:
+                transfer(parseInt(prompt("Enter account to debt from Number(between 0 and "+(accounts.length-1)+"): ")),parseInt(prompt("Enter account to deposit into Number(between 0 and "+(accounts.length-1)+"): ")), parseInt(prompt("Enter amount: ")));
+                break;
+            default:
+                alert("Invalid Input");
+                break;
+        }
+    }
+)();
